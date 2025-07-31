@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday S. Kaviyarasan!</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+      color: #333;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #fff;
+      text-shadow: 2px 2px 5px #00000060;
+    }
+
+    .photo {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      margin: 20px auto;
+      border: 5px solid white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      background-size: cover;
+      background-position: center;
+    }
+
+    .custom-msg {
+      font-size: 2em;
+      color: #6a1b9a;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .message {
+      font-size: 1.3em;
+      margin: 30px auto;
+      max-width: 600px;
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    button {
+      background: #ff6ec4;
+      background: linear-gradient(to right, #ff6ec4, #7873f5);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1em;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .confetti {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+  <canvas class="confetti"></canvas>
+
+  <h1>🎉 Happy Birthday, S. Kaviyarasan! 🎂</h1>
+
+  <div class="photo" style="background-image: url('https://via.placeholder.com/200');"></div>
+
+  <div class="custom-msg">Happieee Birthdayyy Nanbaa🫂💜🌻</div>
+
+  <div class="message">
+    Dear S. Kaviyarasan,<br>
+    Wishing you the happiest of birthdays! May your year ahead be filled with laughter, success, and everything you love. You're truly one of a kind and today is all about YOU. Enjoy every moment!
+  </div>
+
+  <button onclick="playSong()">Play Birthday Song 🎵</button>
+
+  <audio id="song">
+    <source src="https://www2.cs.uic.edu/~i101/SoundFiles/BirthdaySong.mp3" type="audio/mp3" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    function playSong() {
+      document.getElementById('song').play();
+    }
+
+    // Confetti animation
+    const canvas = document.querySelector('.confetti');
+    const ctx = canvas.getContext('2d');
+    let w = canvas.width = window.innerWidth;
+    let h = canvas.height = window.innerHeight;
+    let particles = [];
+
+    for (let i = 0; i < 150; i++) {
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 4 + 1,
+        d: Math.random() * 100
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = "#fff";
+      ctx.beginPath();
+      for (let i = 0; i < particles.length; i++) {
+        let p = particles[i];
+        ctx.moveTo(p.x, p.y);
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true);
+      }
+      ctx.fill();
+      update();
+    }
+
+    let angle = 0;
+    function update() {
+      angle += 0.01;
+      for (let i = 0; i < particles.length; i++) {
+        let p = particles[i];
+        p.y += Math.cos(angle + p.d) + 1 + p.r / 2;
+        p.x += Math.sin(angle) * 2;
+
+        if (p.y > h) {
+          particles[i] = { x: Math.random() * w, y: 0, r: p.r, d: p.d };
+        }
+      }
+    }
+
+    setInterval(draw, 33);
+    window.onresize = () => {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    };
+  </script>
+</body>
+</html>
